@@ -1,7 +1,12 @@
-FROM node:14 AS web-build
+FROM node:16 AS web-build
 WORKDIR /usr/src/app
 COPY ./ ./client
-RUN cd client && npm install && npm run build --prod
+
+ENV NODE_OPTIONS=--max_old_space_size=4096
+
+RUN cd client && npm install
+
+RUN cd client && npm run build --prod
 
 # Use official nginx image as the base image
 FROM nginx:latest
