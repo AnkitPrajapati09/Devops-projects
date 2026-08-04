@@ -1,4 +1,4 @@
-# Prerequisites
+# Prerequisites (Docker project)
 #
 - JDK 11 
 - Maven 3 
