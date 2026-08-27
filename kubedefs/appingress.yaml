@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vpro-ingress
+  annotations:
+    # Tells the controller to rewrite '://example.com' to 'service/v1' if needed
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  # Specifies the Ingress Controller managing this resource (e.g., nginx, traefik, gce)
+  ingressClassName: nginx 
+  
+  # Routing Rules
+  rules:
+    http:
+      paths:
+      
+      # 1. Path-based routing for the frontend
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vproapp-service
+            port:
+              number: 8080
+              
+      
